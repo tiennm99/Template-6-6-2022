@@ -1,0 +1,132 @@
+% region Thông tin
+%%%%%%%%%%%%%%%%
+\def \HoVaTen {Nguyễn Văn A}
+\def \GioiTinh {Nam} % Nam ghi Nam, nữ ghi bất kì string nào khác :)
+\def \MaNhanVien {VG-2332}
+\def \NgayThangNamSinh {01/01/1990}
+\def \SoBHXH {0101010101}
+\def \SoCCCD {010101010101} % Hoặc CMND
+\def \NgayCapCCCD {01/01/2022}
+\def \NoiCapCCCD {Cục Cảnh Sát Quản Lý Hành Chính Về Trật Tự Xã Hội} % (Thông tin lấy ở mặt sau của CCCD/CMND)
+\def \ThuongTru {Tổ 69, khu phố 78, đường số 1, phường 2, quận 3, Hồ Chí
+Minh} % (Thông tin lấy ở mặt trước CCCD/CMND)
+\def \TenDoanhNghiep {Công ty TNHH Phát Triển Phần Mềm VNG}
+\def \DiaChiLamViec {Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Thành phố Hồ Chí Minh, Việt Nam}
+\def \LoaiHopDong {XacDinhThoiHan} % Xác định thời hạn ghi XacDInhThoiHan, không thì bất kì string nào khác :) 
+% \def \LoaiHopDong {HĐLĐ xác định 3 năm} % Field này bỏ rồi, để backup lại thôi :D
+\def \ThoiDiemGiaoKetHopDong {01/10/2021}
+\def \ThoiDiemBatDauHopDong {01/10/2021}
+\def \TenChuTro {Nguyễn Thị B}
+\def \SoCCCDChuTro {020202020202}
+\def \DiaChi {Tổ 11, khu phố 22, đường số 3, phường 4, quận 5, Hồ Chí Minh} % (Địa chỉ nhà trọ)
+\def \DoiTuong {1} % 1: Đang làm việc trong doanh nghiệp, 2: Quay trở lại thị trường lao động
+\def \TenTaiKhoan {\HoVaTen} % Mặc định là HoVaTen ở trên, không phải thì đổi lại nhé :D, xem trong email
+\def \SoTaiKhoan {030303030303} % Xem trong email
+\def \NganHang {MARITIME BANK} % Xem trong email
+\def \HoVaTenChuTro {\TenChuTro}
+\def \SDTChuTro {0123456789}
+\def \NoiKy {HCM}
+\def \Nam {2022}
+%%%%%%%%%%%%%%%%
+% endregion
+
+\documentclass[14pt,a4paper]{extarticle}
+\usepackage[top=1cm,bottom=1cm,left=2cm,right=2cm,includehead,includefoot,heightrounded]{geometry}
+\usepackage[utf8]{vntex}
+\usepackage{amssymb}
+\usepackage[inline]{enumitem}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{times}
+\usepackage{xifthen}
+\setlength{\parindent}{20pt}
+\makeatletter
+\newcommand{\inlineitem}[1][]{
+\ifnum\enit@type=\tw@
+    {\descriptionlabel{#1}}
+  \hspace{\labelsep}
+\else
+  \ifnum\enit@type=\z@
+       \refstepcounter{\@listctr}\fi
+    \quad\@itemlabel\hspace{\labelsep}%
+\fi}
+\makeatletter
+\newcommand{\ifequals}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}
+\newcommand{\case}[2]{#1#2}
+\newenvironment{switch}[1]{\renewcommand{\case}{\ifequals{#1}}}{}
+\newcommand{\getEndOfMonth}[1]{\begin{switch}{#1}\case{1}{31}\case{2}{28}\case{3}{31}\case{4}{30}\case{5}{31}\case{6}{30}\case{7}{31}\case{8}{31}\case{9}{30}\case{10}{31}\case{11}{30}\case{12}{31}\end{switch}}
+\def \checkbox {\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+\def \notcheck {$\square$}
+\begin{document}
+\def \Mau #1 {
+  \def \Thang {#1}
+  \begin{titlepage}
+    \begin{center}
+      \textbf{\fontsize{16pt}{16pt}\selectfont
+        CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM\\
+        \underline{Độc lập - Tự do - Hạnh phúc}\\
+        \vspace{1cm}
+        ĐỀ NGHỊ HỖ TRỢ TIỀN THUÊ NHÀ\\
+        Tháng \Thang{} năm \Nam{}
+      }
+    \end{center}
+    \vspace{1cm}
+    \begin{enumerate}
+        \item Họ và tên: \HoVaTen{} \hfill Giới tính:\
+        Nam \ifthenelse{\equal{\GioiTinh}{Nam}}{\checkbox}{\notcheck}\
+        Nữ \ifthenelse{\equal{\GioiTinh}{Nam}}{\notcheck}{\checkbox}
+        \item Mã NV: \MaNhanVien{}
+        \item Ngày, tháng, năm sinh: \NgayThangNamSinh{} \inlineitem Số sổ BHXH (nếu có): \SoBHXH{}
+        \item Số CCCD/CMND: \SoCCCD{} \hspace{6ex} Ngày cấp: \NgayCapCCCD{}{}\\
+        Nơi cấp: \NoiCapCCCD{}{}
+        \item Nơi đăng ký thường trú: \ThuongTru{}
+        \item Thông tin về hợp đồng lao động và nơi đang làm việc:
+        \begin{itemize}[label={-}]
+            \item Tên doanh nghiệp/hợp tác xã/hộ kinh doanh: \TenDoanhNghiep{}
+            \item Địa chỉ làm việc: \DiaChiLamViec{}
+            \item Loại hợp đồng lao động:\
+            \ifthenelse{\equal{\LoaiHopDong}{XacDinhThoiHan}}{\notcheck}{\checkbox} Không xác định thời hạn\
+            \ifthenelse{\equal{\LoaiHopDong}{XacDinhThoiHan}}{\checkbox}{\notcheck} Xác định thời hạn
+            \item Thời điểm giao kết hợp đồng lao động: Ngày \ThoiDiemGiaoKetHopDong{}
+            \item Thời điểm bắt đầu thực hiện hợp đồng lao động: Ngày \ThoiDiemBatDauHopDong{}
+        \end{itemize}
+        \item Thông tin nơi ở thuê, ở trọ, tháng \Thang{} năm \Nam{}:
+        \begin{itemize}[label={-}]
+            \item Tên chủ cơ sở cho thuê, trọ: \TenChuTro{}
+            \item Số CCCD/CMND: \SoCCCDChuTro{}
+            \item Địa chỉ: \DiaChi{}
+            \item Thời gian ở thuê, ở trọ: Bắt đầu từ ngày 1/\Thang/\Nam{} đến ngày \getEndOfMonth{\Thang}/\Thang/\Nam{}
+        \end{itemize}
+        \item Trong khoảng thời gian từ ngày 1/4/2022 đến ngày 30/6/2022, tôi chưa nhận tiền hỗ trợ của tháng \Thang{} và chưa nhận quá 3 tháng. Căn cứ các quy định tại Quyết định số 08/2022/QĐ-TTg, tôi đề nghị được hỗ trợ tiền thuê nhà của tháng \Thang{} năm \Nam{} theo chính sách hỗ trợ cho đối tượng:
+        \begin{itemize}[label={}]
+            \item \ifthenelse{\equal{\DoiTuong}{1}}{\checkbox}{\notcheck} Người lao động đang làm việc trong doanh nghiệp.
+            \item \ifthenelse{\equal{\DoiTuong}{1}}{\notcheck}{\checkbox} Người lao động quay trở lại thị trường lao động.
+        \end{itemize}
+    \end{enumerate}
+    
+    \textbf{\textit{Nếu được hỗ trợ,}} tôi đề nghị được nhận tiền qua hình thức sau:
+    \begin{itemize}[label={}]
+        \item \checkbox Tài khoản (Tên tài khoản: \TenTaiKhoan{}, số tài khoản: \SoTaiKhoan{}, tại Ngân hàng \NganHang{})
+        \item \notcheck Trực tiếp
+    \end{itemize}
+        
+    Tôi cam đoan nội dung ghi trên là hoàn toàn đúng sự thật, nếu sai tôi sẽ chịu trách nhiệm trước pháp luật.
+    \begin{table}[H]
+        \begin{tabular}{cc}
+        & \textit{HCM, ngày 1 tháng 7 năm 2022} \\
+        \textbf{\begin{tabular}[c]{@{}c@{}}XÁC NHẬN CỦA CHỦ CƠ SỞ\\ CHO THUÊ CHO TRỌ\end{tabular}} & \textbf{NGƯỜI ĐỀ NGHỊ} \\
+        \textit{(Ký, ghi rõ họ tên, số điện thoại)} & \textit{(Ký, ghi rõ họ tên)} \\
+        &  \\
+        &  \\
+        &  \\
+        &  \\
+        \textbf{\HoVaTenChuTro} & \textbf{\HoVaTen} \\
+        (Số điện thoại chủ trọ: \SDTChuTro{}) & 
+        \end{tabular}
+    \end{table}
+  \end{titlepage}
+}
+\Mau{4}
+\Mau{5}
+\Mau{6}
+\end{document}
